@@ -35,8 +35,9 @@ public class Database {
             Database database = Database.getInstance();
             Connection con = database.getConnection();
 
-            String sql = "SELECT * FROM worker ";
+            String sql = "SELECT * FROM worker WHERE name = ?";
             PreparedStatement preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, "John26.0");
 
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
