@@ -31,6 +31,7 @@ public class DatabaseInitService {
                 if (line.endsWith(";")) {
                     String query = sql.toString();
                     try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                        preparedStatement.setString(1, "John26.0");
                         preparedStatement.execute();
                     } catch (SQLException e) {
                         e.printStackTrace();
