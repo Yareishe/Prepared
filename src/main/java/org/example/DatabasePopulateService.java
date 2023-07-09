@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -21,8 +22,7 @@ public class DatabasePopulateService {
     }
 
     private static void executeSqlFile(Connection connection, String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath));
-             Statement statement = connection.createStatement()) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             StringBuilder sql = new StringBuilder();
             String line;
 
@@ -31,13 +31,16 @@ public class DatabasePopulateService {
                 if (line.endsWith(";")) {
                     String[] queries = sql.toString().split(";");
                     for (String query : queries) {
-                        System.out.println(query);
-                        statement.execute(query.trim());
+                        try (PreparedStatement preparedStatement = connection.prepareStatement(query.trim())) {
+                            preparedStatement.execute();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
                     }
                     sql.setLength(0);
                 }
             }
-        } catch (IOException | SQLException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
