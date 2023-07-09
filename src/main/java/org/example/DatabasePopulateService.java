@@ -32,6 +32,7 @@ public class DatabasePopulateService {
                     String[] queries = sql.toString().split(";");
                     for (String query : queries) {
                         try (PreparedStatement preparedStatement = connection.prepareStatement(query.trim())) {
+                            preparedStatement.setString(1, "John26.0");
                             preparedStatement.execute();
                         } catch (SQLException e) {
                             e.printStackTrace();
