@@ -42,7 +42,7 @@ public class DatabasePopulateService {
                         }
                         else {
                             System.out.println(query);
-                            statement.execute(query.trim());
+                            statement.execute(sql.toString());
                         }
                     }
                     sql.setLength(0);
