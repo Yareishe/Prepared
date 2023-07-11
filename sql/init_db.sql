@@ -1,3 +1,4 @@
+SELECT * FROM worker WHERE name = ?;
 CREATE TABLE if not exists worker (
                         ID INT PRIMARY KEY AUTO_INCREMENT,
                         NAME VARCHAR(1000) NOT NULL CHECK (LENGTH(NAME) >= 2 AND LENGTH(NAME) <= 1000),
