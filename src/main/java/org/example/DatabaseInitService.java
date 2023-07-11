@@ -42,9 +42,10 @@ public class DatabaseInitService {
                     else {
                         statement.execute(sql.toString());
                         ResultSet rs = statement.executeQuery("SELECT * FROM worker");
+                        if(rs.next()) {
                             String name = rs.getString("name");
                             System.out.println(name);
-
+                        }
                     }
                     sql.setLength(0);
                 }
