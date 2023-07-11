@@ -1,3 +1,4 @@
+SELECT * FROM worker WHERE name = ?;
 INSERT INTO worker (NAME, BIRTHDAY, LEVEL, SALARY)
 VALUES
     (CONCAT('John', FLOOR(RAND()*100)), '1990-05-15', 'Senior', FLOOR(RAND()*100000)),
